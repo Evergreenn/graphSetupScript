@@ -52,13 +52,11 @@ rm -rf $HOME/neo4j3.3.1/data/databases/graph.db
 
 startContainer
 
-cd $HOME/Documents
+#cd $HOME/Documents
 
-find * -maxdepth 0 -name "*.csv" -print0 | xargs -0 -I {} docker cp {} $CONTAINER_ID:/var/lib/neo4j/import/ 
+find $HOME/Documents/export_neo4j/* -maxdepth 0 -name "*.csv" -print0 | xargs -0 -I {} docker cp {} $CONTAINER_ID:/var/lib/neo4j/import/ 
 
-cd $HOME/PhpstormProjects/untitled/
-
-docker cp Import.cypher $CONTAINER_ID:/var/lib/neo4j/import
+docker cp $HOME/PhpstormProjects/untitled/Import.cypher $CONTAINER_ID:/var/lib/neo4j/import
 
 dockerexec
 
